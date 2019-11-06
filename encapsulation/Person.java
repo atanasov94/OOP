@@ -7,10 +7,10 @@ public class Person {
     private double salary;
 
     public Person(String firstName, String lastName, int age, double salary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.salary = salary;
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setAge(age);
+        this.setSalary(salary);
     }
 
     public String getFirstName() {
@@ -22,7 +22,11 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if (firstName.length() < 3) {
+            throw new IllegalArgumentException("First name cannot be less than 3 symbols");
+        } else {
+            this.firstName = firstName;
+        }
     }
 
     public String getLastName() {
@@ -30,11 +34,19 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if (lastName.length() < 3) {
+            throw new IllegalArgumentException("Last name cannot be less than 3 symbols");
+        } else {
+            this.lastName = lastName;
+        }
     }
 
     public void setAge(int age) {
-        this.age = age;
+        if (age <= 0) {
+            throw new IllegalArgumentException("Age cannot be zero or negative integer");
+        } else {
+            this.age = age;
+        }
     }
 
     private double getSalary() {
@@ -42,7 +54,11 @@ public class Person {
     }
 
     private void setSalary(double salary) {
-        this.salary = salary;
+        if (salary < 460) {
+            throw new IllegalArgumentException("Salary cannot be less than 460 leva");
+        } else {
+            this.salary = salary;
+        }
     }
 
     @Override
@@ -53,9 +69,9 @@ public class Person {
 
     public void increaseSalary(double bonus) {
         if (this.age < 30) {
-            this.setSalary(this.getSalary() + this.getSalary() * ((bonus / 2)/100));
+            this.setSalary(this.getSalary() + this.getSalary() * ((bonus / 2) / 100));
         } else {
-            this.setSalary(this.getSalary() + this.getSalary() * (bonus/100));
+            this.setSalary(this.getSalary() + this.getSalary() * (bonus / 100));
         }
     }
 }
