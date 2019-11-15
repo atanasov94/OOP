@@ -34,6 +34,6 @@ public abstract class VehicleImpl implements Vehicle {
 
     @Override
     public String toString() {
-        return String.format(" %.2f", this.fuelQuantity);
+        return String.format(": %.2f", this.fuelQuantity);
     }
 }
