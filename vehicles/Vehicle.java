@@ -1,6 +1,6 @@
 package vehicles;
 
 public interface Vehicle {
-    String drive(double distance);
-    void refuel(double liters);
+    void drive (Double distance);
+    void refuel (Double liters);
 }

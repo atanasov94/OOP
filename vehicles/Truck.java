@@ -1,53 +1,27 @@
 package vehicles;
 
-import java.text.DecimalFormat;
+public class Truck extends VehicleImpl {
+    public static final Double AC_EXTRA_CONSUMPTION = 1.6;
+    public static final String CLAZZ_NAME = "Truck";
 
-public class Truck implements Vehicle {
-    private double fuelQuantity;
-    private double fuelConsumptionPerKm;
-    private double tankCapacity;
-
-    public Truck(double fuelQuantity, double fuelConsumptionPerKm, double capacity) {
-        this.fuelQuantity = fuelQuantity;
-        this.fuelConsumptionPerKm = fuelConsumptionPerKm + 1.6;
-        this.tankCapacity = capacity;
+    public Truck(Double fuelQuantity, Double fuelConsumption) {
+        super(fuelQuantity, fuelConsumption + AC_EXTRA_CONSUMPTION);
     }
 
     @Override
-    public String drive(double distance) {
-        if (this.fuelQuantity >= this.fuelConsumptionPerKm * distance) {
-            this.setFuelQuantity(this.fuelQuantity - this.fuelConsumptionPerKm * distance);
-            DecimalFormat df = new DecimalFormat("#.##");
-            return String.format("Truck travelled %s km",
-                    df.format(distance));
-        }
-        return "Truck needs refueling";
+    public void refuel(Double liters) {
+        super.refuel(0.95 * liters);
     }
 
     @Override
-    public void refuel(double liters) {
-        if (liters <= 0) {
-            throw new IllegalArgumentException("Fuel must be a positive number");
-        }
-        if (this.fuelQuantity + 0.95 * liters > this.tankCapacity) {
-            throw new IllegalArgumentException("Cannot fit fuel in tank");
-        }
-        this.setFuelQuantity(this.getFuelQuantity() + 0.95 * liters);
+    public void drive(Double distance) {
+        System.out.print(CLAZZ_NAME);
+        super.drive(distance);
     }
 
-    public double getFuelQuantity() {
-        return fuelQuantity;
-    }
-
-    public void setFuelQuantity(double fuelQuantity) {
-        this.fuelQuantity = fuelQuantity;
-    }
-
-    public double getFuelConsumptionPerKm() {
-        return fuelConsumptionPerKm;
-    }
-
-    public void setFuelConsumptionPerKm(double fuelConsumptionPerKm) {
-        this.fuelConsumptionPerKm = fuelConsumptionPerKm;
+    @Override
+    public String toString() {
+        System.out.print(CLAZZ_NAME);
+        return super.toString();
     }
 }
