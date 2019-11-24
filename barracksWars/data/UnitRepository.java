@@ -4,6 +4,7 @@ import barracksWars.interfaces.Repository;
 import barracksWars.interfaces.Unit;
 import jdk.jshell.spi.ExecutionControl;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -38,8 +39,12 @@ public class UnitRepository implements Repository {
 		return statBuilder.toString();
 	}
 
-	public void removeUnit(String unitType) throws ExecutionControl.NotImplementedException {
-		// TODO: implement for problem 4
-		throw new ExecutionControl.NotImplementedException("message");
+	public void removeUnit(String unitType) throws ExecutionControl.NotImplementedException, OperationNotSupportedException {
+		if (!this.amountOfUnits.containsKey(unitType)) {
+			throw new OperationNotSupportedException("No such units in repository.");
+		}
+		int newValue = this.amountOfUnits.get(unitType) -1;
+		this.amountOfUnits.put(unitType, newValue);
+
 	}
 }
